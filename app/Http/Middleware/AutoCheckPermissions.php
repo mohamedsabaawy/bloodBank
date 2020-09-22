@@ -17,7 +17,7 @@ class AutoCheckPermissions
     public function handle($request, Closure $next)
     {
         $route =$request->route()->getName();
-        $permission =Permission::whereRaw("FIND_IN_SET('$route', route)")->first();
+        $permission =Permission::whereRaw("FIND_IN_SET($route,route)")->first();
         if ($permission)
         {
             if (!$request->user()->can($permission->name))
